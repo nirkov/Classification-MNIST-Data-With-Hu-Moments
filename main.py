@@ -84,8 +84,10 @@ def main():
         print()
 
     print()
-    print(
-        "*************************************************************************************************************")
+    print("max_average_c : " + str(max_average_c))
+    print("max_c : " + str(max_c))
+    print()
+    print("***********************************************************************************************************")
     print("                            Training with RBF kernel - 'number of iteration' is variable")
     print("***********************************************************************************************************")
     print()
@@ -96,7 +98,7 @@ def main():
         # images.
         gamma_variable_classifier = train_svm_model.train_model_RBF_kernel(num_train=30000, images=train_images,
                                                                            tag=train_labels, gamma_value=0.5,
-                                                                           num_iteretion=iteration, c_value= 10,
+                                                                           num_iteretion=iteration, c_value=10,
                                                                            log_transform=True, RAM_size=8000)
         # Predicting the test data.
         prediction, labels = predict_svm_model.predict(clf=gamma_variable_classifier, num_test=3000, images=test_images,
@@ -104,16 +106,17 @@ def main():
         # Print statistic using 'classification_report' function of sklearn library
         statistic_printer.print_SVM_HuMoment_statistic(labels, prediction, gamma_variable_classifier)
         # Save the calculated statistic in csv (exl) file
-        statistic_printer.save_SVM_HuMoment_csvFile(labels, prediction, "Iteration - variable", 'C', c)
-        # Save the maximum accuracy and the corresponding value of c
+        statistic_printer.save_SVM_HuMoment_csvFile(labels, prediction, "Iteration - variable", 'Iteration', iteration)
+        # Save the maximum accuracy and the corresponding number of iteration
         max_average_iter, max_iter = statistic_printer.make_max_average(prediction, labels, 3000, max_average_iter, max_iter, iteration)
         iteration = iteration + 500
 
         print("_______________________________________________________________________________________________________")
         print()
 
-    print("max_average_c : " + str(max_average_c))
-    print("max_c : " + str(max_c))
+
+    print("max_average_iter : " + str(max_average_iter))
+    print("max_iter : " + str(max_iter))
     print()
     print()
     print("***********************************************************************************************************")
@@ -138,7 +141,7 @@ def main():
             GAMMA.append(gamma)
             C.append(c)
             avr = 0
-            for i in range (0,3000):
+            for i in range(0,3000):
                 if(prediction[i]==labels[i]):
                     avr = avr + 1
             avr = (avr/3000)*100
