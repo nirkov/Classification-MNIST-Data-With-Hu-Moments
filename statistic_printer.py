@@ -75,7 +75,7 @@ def make_3D_graph(x,x_name,y,y_name,prediction,prediction_name):
     prediction = np.array(prediction)
     fig = plt.figure()
     ax = fig.gca(projection='3d')
-    ax.scatter(x, y, prediction, c='r', marker='o')
+    ax.scatter(x, y, prediction, c='b', marker='o')
     ax.set_xlabel(x_name)
     ax.set_ylabel(y_name)
     ax.set_zlabel(prediction_name)
