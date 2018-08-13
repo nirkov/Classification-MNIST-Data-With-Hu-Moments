@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import axes3d
 import matplotlib.pyplot as plt
 
-def confusion_matrix_image(labels,prediction):
+def confusion_matrix_image(labels,prediction,name):
     confusion_matrix_image = np.array(sklearn.metrics.confusion_matrix(labels, prediction)).reshape(10, 10)
     classes = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     cm = pd.DataFrame(confusion_matrix_image, index=classes, columns=classes)
@@ -14,7 +14,7 @@ def confusion_matrix_image(labels,prediction):
     cm.columns.name = 'Predicted class'
     fig, ax = plt.subplots(figsize=(10, 10))
     sns.heatmap(cm, annot=np.empty_like(cm).astype(str), fmt='', ax=ax)
-    plt.savefig('confusion matrix image.jpeg')
+    plt.savefig("confusion matrix/"+name+'.jpeg')
 
 
 def print_SVM_HuMoment_statistic(labels,prediction,classifier):

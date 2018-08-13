@@ -4,6 +4,7 @@ import model_statistics
 import numpy as np
 import matplotlib.pyplot as plt
 
+import statistic_printer
 
 
 def main():
@@ -60,7 +61,7 @@ def main():
                                                  test_images   =test_images,
                                                  test_labels   =test_labels)
 
-    model_statistics.percision_gamma_c_3D(iter          =10000,
+    model_statistics.percision_gamma_c_3D(iterr         =10000,
                                           num_train     =15000,
                                           num_test      =3000,
                                           c_max         =90,
@@ -74,8 +75,17 @@ def main():
                                           test_images   =test_images,
                                           test_labels   =test_labels)
 
-
-
+    model_statistics.confusion_matrix_of_gamma_c(gamma_list=[0.1, 0.02],
+                                                 c_list=[70, 1001],
+                                                 log_trans=True,
+                                                 iterr=-1,
+                                                 num_train=60000,
+                                                 train_images=train_images,
+                                                 test_images=test_images,
+                                                 train_labels=train_labels,
+                                                 test_labels=test_labels,
+                                                 num_test=5000,
+                                                 ram_size=8000)
 
 if __name__ == "__main__":
         main()
