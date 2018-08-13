@@ -1,17 +1,16 @@
-import numpy as np
 import cv2
+import train_svm_model
 
 
-def predict(clf, num_test, images, tag):
+def predict(clf, num_test, images, tag, log_transform=True):
     test_images_list = []
     test_label_list = []
 
     for i in range(0, num_test):
-        temp2 = cv2.HuMoments(cv2.moments(images[i])).flatten()
-        temp22 = -np.sign(temp2) * np.log10(np.abs(temp2))
-        index = np.isnan(temp22)
-        temp22[index] = 0
-        test_images_list.append(temp22)
+        hu = cv2.HuMoments(cv2.moments(images[i])).flatten()
+        if(log_transform):
+            hu = train_svm_model.log_transformation(hu)
+        test_images_list.append(hu)
         test_label_list.append(tag[i])
 
     return clf.predict(test_images_list), test_label_list

@@ -3,7 +3,8 @@ import pandas as pd
 import seaborn as sns
 import numpy as np
 import matplotlib.pyplot as plt
-
+from mpl_toolkits.mplot3d import axes3d
+import matplotlib.pyplot as plt
 
 def confusion_matrix_image(labels,prediction):
     confusion_matrix_image = np.array(sklearn.metrics.confusion_matrix(labels, prediction)).reshape(10, 10)
@@ -75,8 +76,17 @@ def make_3D_graph(x,x_name,y,y_name,prediction,prediction_name):
     prediction = np.array(prediction)
     fig = plt.figure()
     ax = fig.gca(projection='3d')
-    ax.scatter(x, y, prediction, c='b', marker='o')
+    ax.scatter(x, y, prediction, c='g', marker='o')
     ax.set_xlabel(x_name)
     ax.set_ylabel(y_name)
     ax.set_zlabel(prediction_name)
     plt.show()
+
+def show_images(image,tag,fromIndex, toIndex):
+    for y in range(fromIndex,toIndex):
+        first_image = image[y]
+        print("iterationtest "+str(y)+" : " +str(tag[y]))
+        first_image = np.array(first_image, dtype='float')
+        pixels = first_image.reshape((28, 28))
+        plt.imshow(pixels, cmap='gray')
+        plt.show()
